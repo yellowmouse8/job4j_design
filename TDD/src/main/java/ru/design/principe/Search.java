@@ -16,6 +16,21 @@ import java.util.stream.Collectors;
 
 public class Search {
     public Integer max(List<Integer> value, Comparator<Integer> comparator) {
+        return max(value);
+    }
+
+    public Integer min(List<Integer> value, Comparator<Integer> comparator) {
+        int call = value.get(0);
+        for (Integer link : value) {
+            if (comparator.compare(link, call) < 0) {
+                call = link;
+            }
+
+        }
+        return call;
+    }
+
+    private Integer max(List<Integer> value) {
         int max = value.get(0);
         for (Integer val : value) {
             if (val > max) {
@@ -23,10 +38,6 @@ public class Search {
             }
         }
         return max;
-    }
-
-    public Integer min(List<Integer> value, Comparator<Integer> comparator) {
-        return Collections.min(value, comparator);
     }
 
     public static void main(String[] args) {
