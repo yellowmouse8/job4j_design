@@ -16,21 +16,22 @@ public class TemplateTest {
     public void whenTakeTextWithDataShouldReplaceParamsToData() {
         //assign
         Template template = new SimpleGenerator();
-        String text = "I am ${name}, who are ${subject}.";
-        Map<String, String> data = Map.of("Pi", "You?");
-        String checked = "I am Pi, Who are you?";
+        String text = "I am ${name}, who are ${subject}?";
+        Map<String, String> data = Map.of("name", "Pi", "subject", "you");
+        String checked = "I am Pi, who are you?";
         //act
         String result = template.generate(text, data);
         //action
         Assert.assertThat(result, is(checked));
 
     }
+
     @Test
-    public void whenTakeThreeNames(){
+    public void whenTakeThreeNames() {
         Template template = new SimpleGenerator();
         String text = "${name}, ${sos}, ${sos}, ${sos}!";
-        Map<String , String> data = Map.of("Help", "Aaaa");
-        String checked = "Help , Aaaa, Aaaa, Aaaa!";
+        Map<String, String> data = Map.of("name", "Help", "sos", "Aaaa");
+        String checked = "Help, Aaaa, Aaaa, Aaaa!";
         String result = template.generate(text, data);
         Assert.assertThat(result, is(checked));
 
