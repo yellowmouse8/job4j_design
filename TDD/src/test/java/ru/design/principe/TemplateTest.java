@@ -43,4 +43,13 @@ public class TemplateTest {
         String result = template.generate(text, data);
         System.out.println(result);
     }
+    @Test
+    public void whenTooMuchKeys() {
+        Template template = new SimpleGenerator();
+        String text = "${name} , ${sos} , ${sos} , ${sos} !";
+        Map<String, String> data = Map.of("${name}", "Help","${sos}", "Aaaa","${sos}", "Aaaa");
+        String result = template.generate(text, data);
+        String checked  = "Help , Aaaa , Aaaa , Aaaa !";
+        assertThat(result, is(checked));
+    }
 }
