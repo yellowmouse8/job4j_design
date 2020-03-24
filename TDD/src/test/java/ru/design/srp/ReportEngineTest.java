@@ -37,19 +37,26 @@ public class ReportEngineTest {
         assertThat(worker.getSalaryInt(), is(intType));
     }
 
+
     @Test
-    public void whenSalaryDescription() {
+    public void whenReportOnlyTwoDirectoriesSalaryDescription() {
         MemStoreSort store = new MemStoreSort();
-        Employer worker1 = new Employer("Ben", 3400.32);
-        Employer worker2 = new Employer("Fill", 3500.4);
-        Employer worker3 = new Employer("Ivan", 5440.4);
-        Employer worker4 = new Employer("Jim", 5500.4);
-        List<Employer> list = List.of(worker1, worker2, worker3, worker4);
-        store.add(worker1);
-        store.add(worker2);
-        store.add(worker3);
-        store.add(worker4);
-        List<Employer> expect = List.of(worker4, worker3, worker2, worker1);
-        assertThat(store.sorter(list), is(expect));
+        Employer employer = new Employer("Tim", 5000.0);
+        Employer employer2 = new Employer("Dick", 5666.0);
+        Employer employer3 = new Employer("Travor", 23440.0);
+        Employer employer4 = new Employer("Max", 4444.4);
+        List<Employer> list = List.of(employer, employer2, employer3, employer4);
+        store.addList(list);
+        ReportHR engine = new ReportHR(store);
+        StringBuilder expect = new StringBuilder().append(" Name; Salary; ")
+                .append(employer3.getName()).append("; ")
+                .append(employer3.getSalaryDouble()).append(";")
+                .append(employer2.getName()).append("; ")
+                .append(employer2.getSalaryDouble()).append(";")
+                .append(employer.getName()).append("; ")
+                .append(employer.getSalaryDouble()).append(";")
+                .append(employer4.getName()).append("; ")
+                .append(employer4.getSalaryDouble()).append(";");
+        assertThat(engine.generate(em -> true), is(expect.toString()));
     }
 }
