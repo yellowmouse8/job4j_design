@@ -5,16 +5,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SimpleGenerator implements Template {
-    private final String STROKE = "\\$\\{[A-Za-z]+\\W";
-    private final Pattern PATTERN = Pattern.compile(STROKE);
+    private final String stroke = "\\$\\{[A-Za-z]+\\W";
+    private final Pattern pattern = Pattern.compile(stroke);
     private Matcher m;
 
     @Override
     public String generate(String template, Map<String, String> stroke) {
-        m = PATTERN.matcher(template);
-        StringBuffer sb = new StringBuffer();
+        m = pattern.matcher(template);
+        StringBuilder sb = new StringBuilder();
         Set<String> set = new HashSet<>(stroke.keySet());
-
         while (m.find()) {
             if (!stroke.containsKey(m.group())) {
                 throw new IllegalStateException("Не соответствие шаблону ! ");
