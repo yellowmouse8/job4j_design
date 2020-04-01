@@ -10,6 +10,7 @@
     <version>3.0</version>
     <modules>
         <module>TDD</module>
+        <module>IO</module>
     </modules>
 
     <properties>
