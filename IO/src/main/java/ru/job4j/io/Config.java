@@ -25,8 +25,6 @@ public class Config {
                 values.put((String) entry.getKey(), (String) entry.getValue());
             }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,6 +36,9 @@ public class Config {
             if (s.getKey().equals(key)) {
                 value = s.getValue();
             }
+        }
+        if (value == null) {
+            throw new UnsupportedOperationException("Don't impl this method yet!");
         }
         return value;
     }
