@@ -33,19 +33,13 @@ public class Config {
     }
 
     public String value(String key) {
-        InputStream in = null;
-        BufferedReader br;
-        br = new BufferedReader(new InputStreamReader(in));
-        String line = null;
-        do {
-            try {
-                line = br.readLine();
-
-            } catch (IOException e) {
-                e.printStackTrace();
+        String value = null;
+        for (Map.Entry<String, String> s : values.entrySet()) {
+            if (s.getKey().equals(key)) {
+                value = s.getValue();
             }
-        } while ((line != null) && line.indexOf(key) == -1);
-        return line;
+        }
+        return value;
     }
 
     @Override
