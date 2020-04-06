@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
+
 
 public class Config {
     private final String path;
@@ -19,8 +19,9 @@ public class Config {
         try {
             File file = new File(this.path);
             FileInputStream in = new FileInputStream(file);
+            InputStreamReader is = new InputStreamReader(in, "windows-1251");
             Properties properties = new Properties();
-            properties.load(in);
+            properties.load(is);
             for (Map.Entry<Object, Object> entry : properties.entrySet()) {
                 values.put((String) entry.getKey(), (String) entry.getValue());
             }
@@ -47,7 +48,9 @@ public class Config {
     public String toString() {
         StringJoiner out = new StringJoiner(System.lineSeparator());
         try
-                (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
+
+                (BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(this.path)
+                        , "windows-1251"))) {
             read.lines().forEach(out::add);
         } catch (Exception e) {
             e.printStackTrace();

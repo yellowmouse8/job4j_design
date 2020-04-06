@@ -40,4 +40,11 @@ public class ConfigTest {
         String result = config.value("Devastator");
         System.out.println(result);
     }
+    @Test
+    public void whenRussianSymbols(){
+        String path = "./data/sata.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("Привет"), is("как дела?"));
+    }
 }
