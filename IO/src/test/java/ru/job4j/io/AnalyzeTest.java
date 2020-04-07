@@ -12,14 +12,8 @@ import static org.junit.Assert.assertThat;
 public class AnalyzeTest {
     @Test
     public void whenStartToEnd() {
-        List<String> times = List.of("500 10:57:01"
-                , "400 10:58:01"
-                , "500 11:01:02"
-                , ""
-                , "200 10:56:01"
-                , "200 10:59:01"
-                , "200 11:02:02"
-                , "");
+        List<String> times = List.of("10:57:01 <-> 10:59:01"
+                , "11:01:02 <-> 11:02:02");
         Analizy analizy = new Analizy();
         String source = "./data/server.log";
         String target = "./data/unavailable.csv";
