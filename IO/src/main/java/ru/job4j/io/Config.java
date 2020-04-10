@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -19,13 +20,15 @@ public class Config {
         try {
             File file = new File(this.path);
             FileInputStream in = new FileInputStream(file);
-            InputStreamReader is = new InputStreamReader(in, "windows-1251");
+            InputStreamReader is = new InputStreamReader(in, StandardCharsets.UTF_8);
             Properties properties = new Properties();
             properties.load(is);
             for (Map.Entry<Object, Object> entry : properties.entrySet()) {
                 values.put((String) entry.getKey(), (String) entry.getValue());
             }
 
+        } catch (RuntimeException | FileNotFoundException fa) {
+            System.err.println(" Введите существующий файл на вашем компьютере. ");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,13 +50,13 @@ public class Config {
     @Override
     public String toString() {
         StringJoiner out = new StringJoiner(System.lineSeparator());
-        try
-
-                (BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream(this.path)
-                        , "windows-1251"))) {
+        try {
+            File file = new File(this.path);
+            InputStreamReader in = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+            BufferedReader read = new BufferedReader(in);
             read.lines().forEach(out::add);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (RuntimeException | FileNotFoundException fa) {
+            System.err.println(" Введите существующий файл на вашем компьютере. ");
         }
         return out.toString();
     }
