@@ -22,8 +22,8 @@ public class Search {
 
             for (Path path : stream) {
                 if (!Files.isDirectory(path)) {
-                    if (path.getFileName().toString().endsWith(ext)) {
-                        list.add(path.getFileName().toString());
+                    if (!path.getFileName().toString().endsWith(ext)) {
+                        list.add(path.toString());
                     }
                 }
             }
