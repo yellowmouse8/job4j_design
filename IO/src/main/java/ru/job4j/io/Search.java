@@ -18,7 +18,7 @@ public class Search {
     public static List<String> search(Path root, String ext) throws IOException {
         List<String> list = new ArrayList<>();
         try
-                (DirectoryStream<Path> stream = Files.newDirectoryStream(root)) {
+                (DirectoryStream<Path> stream = Files.newDirectoryStream(root.getParent())) {
 
             for (Path path : stream) {
                 if (!Files.isDirectory(path)) {

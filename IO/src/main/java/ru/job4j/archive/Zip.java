@@ -4,6 +4,7 @@ import ru.job4j.io.PrintFiles;
 import ru.job4j.io.Search;
 
 import java.io.*;
+import java.nio.Buffer;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +12,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -47,6 +50,6 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-        new Zip().packFiles(Search.search(Path.of("./IO"), "jpg"), new File("target.zip"));
+        new Zip().packFiles(Search.search(Path.of("./IO/pom.xml"), "txt"), new File("target.zip"));
     }
 }
